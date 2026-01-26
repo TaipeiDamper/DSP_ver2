@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="modules">
+      <UniqueIdentifier>{8da8936e-d8cc-419c-a9a5-e21fac2f4308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\level0">
+      <UniqueIdentifier>{21c951d1-0a69-475d-be72-c35f1be39fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\level1">
+      <UniqueIdentifier>{2604f8b2-e9e0-4e60-9313-2f52574791b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\level2">
+      <UniqueIdentifier>{56e3be32-8598-4b9c-8705-04b317391dbc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DSP_Lab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\modules\level0_dsp_core\interpolation.h">
+      <Filter>modules\level0</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level0_dsp_core\ringBuffer.h">
+      <Filter>modules\level0</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level0_dsp_core\smoother.h">
+      <Filter>modules\level0</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level1_dsp_building_blocks\delay_comb_allpass.h">
+      <Filter>modules\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level1_dsp_building_blocks\diodeClipper.h">
+      <Filter>modules\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level1_dsp_building_blocks\distortion.h">
+      <Filter>modules\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level1_dsp_building_blocks\filter.h">
+      <Filter>modules\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level1_dsp_building_blocks\gain.h">
+      <Filter>modules\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level1_dsp_building_blocks\oscillator.h">
+      <Filter>modules\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level2_dsp_effects\compressor.h">
+      <Filter>modules\level2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level2_dsp_effects\reverb_fromCombAllpass.h">
+      <Filter>modules\level2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level0_dsp_core\constant.h">
+      <Filter>modules\level0</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\modules\level2_dsp_effects\flanger_phaseEffect.h">
+      <Filter>modules\level2</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

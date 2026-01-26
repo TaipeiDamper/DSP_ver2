@@ -1,0 +1,33 @@
+# Visual Studio & CMake build files
+out/
+build/
+.vs/
+.vscode/
+
+# Ignore all x64 and Debug/Release folders in any subdirectory
+x64/
+Debug/
+Release/
+
+# File extensions to ignore
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.lib
+*.dll
+*.suo
+*.user
+*.db
+*.ipch
+*.opendb
+*.tlog
+*.idb
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Mac
+.DS_Store
