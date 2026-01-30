@@ -1,3 +1,4 @@
+目標設定在2026 12月必須要有把握可以取得這份
 工作內容
 Positive Grid is shaping the future of guitar and music technology. We are looking for a DSP Engineer (mid to senior level) to join our team. You will design and refine real-time audio processing algorithms, and contribute to our transition toward AI-enhanced development workflows.
     Depending on your experience, you may also take on system integration tasks and provide mentorship to junior engineers.
