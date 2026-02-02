@@ -21,6 +21,13 @@ public:
 
     float processSample(float input_){
         float y = (1 - alpha) * y1 + alpha * input_;
+
+        // check if |y - input| is too small
+        if(std::abs(y - input_) < 1e-6f){
+            y = input_;
+        }
+
+
         y1 = y;             // pass to next calculate
         return y;
     }
