@@ -4,6 +4,18 @@
 
 ---
 
+## 現代化的 CMake 操作流程 (Modern CLI)
+
+為了保持開發環境整潔，請優先使用以下現代指令，避免手動切換資料夾。
+
+| 動作 | 現代寫法 (推薦) | 舊式寫法 | 說明 |
+| :--- | :--- | :--- | :--- |
+| **配置環境** | `cmake -B build` | `mkdir build; cd build; cmake ..` | 自動建立資料夾並產生專案檔 |
+| **啟動編譯** | `cmake --build build` | `cd build; (手動開 VS 編譯)` | 從命令列直接啟動編譯器 |
+| **使用 Preset** | `cmake --preset default` | (無替代) | 一鍵套用複雜的預設設定 (JUCE 常用) |
+
+---
+
 ## 1. 核心開發模式：Visual Studio 【資料夾檢視 (Folder View)】
 
 這是目前推薦的標準開發方式，完全不需要傳統的 `.sln` 或 `.vcxproj` 檔案。
