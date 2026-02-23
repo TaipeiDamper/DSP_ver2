@@ -1,4 +1,4 @@
-// SimpleWavIO.cpp
+﻿// SimpleWavIO.cpp
 
 # define DR_WAV_IMPLEMENTATION
 # include "SimpleWavIO.h"
@@ -105,4 +105,6 @@ bool writeWav_MultiChannel(const std::string& filename,
     }
     return writeWav(filename, interleaved, sampleRate, channels);
 }
+
+
 

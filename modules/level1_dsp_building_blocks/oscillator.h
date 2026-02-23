@@ -1,4 +1,4 @@
-// oscillator
+﻿// oscillator
 # pragma once
 # include <cmath>
 # include "constant.h"
@@ -220,3 +220,5 @@ public:
 		return carrierOsc.getVal(phaseOffset_);
 	}
 };
+
+

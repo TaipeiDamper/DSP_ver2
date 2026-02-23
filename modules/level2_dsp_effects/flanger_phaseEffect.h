@@ -1,13 +1,13 @@
-#pragma once
+﻿#pragma once
 # include "delay_comb_allpass.h"
 # include "oscillator.h"
 # include "filter.h"
 
 
 //Feedforward Flanger / Chorus
-//核心就是用一個可變的短延遲（通常幾毫秒），再把原始訊號與延遲訊號相加。
-//延遲時間用 LFO（Phasor）控制 SimpleDelay::setDelayInSec。
-//公式：y[n] = x[n] + g * x[n - M(n)]，M(n) 為 LFO 控制的延遲樣本數。
+//?詨?撠望?其??霈??剖辣?莎??虜撟暹神蝘?嚗???憪???撱園閮??詨???
+//撱園????LFO嚗hasor嚗??SimpleDelay::setDelayInSec??
+//?砍?嚗[n] = x[n] + g * x[n - M(n)]嚗(n) ??LFO ?批?辣?脫見?祆??
 class FFFlanger {
 protected:
 	Delay delay;
@@ -69,7 +69,7 @@ public:
 
 	virtual float processSample(float input_) {
 		//FF: y[n] = x[n] + g*x[n-mod * M]
-		//公式：y[n] = x[n] + g * x[n - M(n)]，M(n) 為 LFO 控制的延遲樣本數。
+		//?砍?嚗[n] = x[n] + g * x[n - M(n)]嚗(n) ??LFO ?批?辣?脫見?祆??
 		// get Osc output and calculate delayInSec for this sample
 		float nextDelayInSec = modRangeInSec * sinOsc.processSample() + basicDelayInSec;
 		
@@ -91,14 +91,14 @@ public:
 
 
 //Feedback Flanger / Chorus
-//和 Feedforward 差別在於延遲輸出再回饋到延遲線。
-//公式：y[n] = x[n] + g * y[n - M(n)]，這和你的 FBCombFilter 一樣概念。
-//注意回饋 gain 不要 >1，避免震盪。
+//??Feedforward 撌桀?冽撱園頛詨??擖撱園蝺?
+//?砍?嚗[n] = x[n] + g * y[n - M(n)]嚗?雿? FBCombFilter 銝璅??敹萸?
+//瘜冽??? gain 銝? >1嚗???芥?
 class FBFlanger : public FFFlanger {
 public:
 	FBFlanger() {};
 	virtual float processSample  (float input_) override {
-		//公式：y[n] = x[n] + g * y[n - M(n)]，M(n) 
+		//?砍?嚗[n] = x[n] + g * y[n - M(n)]嚗(n) 
 		// get Osc output and calculate delayInSec for this sample
 		float nextDelayInSec = modRangeInSec * sinOsc.processSample() + basicDelayInSec;
 
@@ -192,3 +192,4 @@ public:
 	}
 
 };
+

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 //interpolation.h
 
 namespace Interp {
@@ -19,4 +19,6 @@ namespace Interp {
 	}
 
 }
+
+
 

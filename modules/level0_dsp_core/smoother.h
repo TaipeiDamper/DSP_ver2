@@ -1,4 +1,4 @@
-#include <cmath>
+﻿#include <cmath>
 
 class ParamSmoother {
 protected:
@@ -21,7 +21,8 @@ public:
   };
 
   float processSample(float input_) {
-    float y = (1 - alpha) * y1 + alpha * input_;
+    // float y = (1 - alpha) * y1 + alpha * input_;
+    float y = y1 + alpha * (input_ - y1);
 
     // check if |y - input| is too small
     if (std::abs(y - input_) < 1e-6f) {

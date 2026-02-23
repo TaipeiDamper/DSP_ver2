@@ -3,16 +3,16 @@
 這是一份 C++ 核心知識點的清單，用於追蹤學習進度與深度理解。
 
 ## 1. 基礎開發 (Basics)
-- [ ] Basic Syntax (基本語法)
-- [ ] Basic Types (基本類型)
-- [ ] Variables (變數)
-- [ ] Functions (函式)
-- [ ] Headers & Source Files (標頭檔與源文件)
-- [ ] Enum and Enum Class
+- [x] Basic Syntax (基本語法)
+- [x] Basic Types (基本類型)
+- [x] Variables (變數)
+- [x] Functions (函式)
+- [x] Headers & Source Files (標頭檔與源文件)
+- [x] Enum and Enum Class
 - [ ] Static Local Variables (靜態區域變數)
 
 ## 2. 物件導向與抽象 (OOP & Abstraction)
-- [ ] Classes (類別)
+- [x] Classes (類別)
 - [ ] Inheritance & Polymorphism and how it's achieved (繼承與多型及其實現方式)
 - [ ] (Pure) Virtual Member Functions (純虛擬成員函式)
 - [ ] Function Templates Basics (函式模板基礎)
@@ -42,4 +42,4 @@
 - [ ] Static Library, Dynamic Library (靜態庫、動態庫)
 
 ---
-*最後更新: 2026-02-12*
+*最後更新: 2026-02-23*

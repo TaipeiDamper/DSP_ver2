@@ -1,4 +1,4 @@
-//SimpleWavIO.h
+﻿//SimpleWavIO.h
 
 #pragma once
 # include <vector>
@@ -30,6 +30,8 @@ bool writeWav(const std::string& filename,
 bool writeWav_MultiChannel(const std::string& filename,
     const std::vector<std::vector<float>>& buffer,
     int sampleRate);
+
+
 
 
 

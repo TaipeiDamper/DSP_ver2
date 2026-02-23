@@ -1,17 +1,13 @@
-﻿#pragma once
+﻿// recall ADSR memory
+#include <iostream>
 
-// ADSR Envelope Generator
-// Level 1 Building Block
-// Integrated Version 2.0 (2026-02-23)
+enum class State { Idle, Attack, Decay, Sustain, Release };
 
 class Envelope {
-public:
-  enum class State { Idle, Attack, Decay, Sustain, Release };
-
 private:
   State state = State::Idle;
 
-  float attackInSec = 0.1f;
+  float attackInSec = 0.5f;
   float decayInSec = 0.5f;
   float sustain = 0.5f;
   float releaseInSec = 0.5f;
@@ -21,13 +17,13 @@ private:
   float releaseDelta = 0.0f;
 
   float currentLevel = 0.0f;
-  float sampleRate = 44100.0f;
+
+  float sampleRate = 44100.f;
 
 public:
-  Envelope() { updateDelta(); }
-
-  void prepare(float newSampleRate) {
-    sampleRate = newSampleRate;
+  Envelope() {}
+  void prepare(float sampleRate_) {
+    sampleRate = sampleRate_;
     updateDelta();
   }
 
@@ -36,7 +32,6 @@ public:
     case State::Idle:
       currentLevel = 0.0f;
       break;
-
     case State::Attack:
       currentLevel += attackDelta;
       if (currentLevel >= 1.0f) {
@@ -44,7 +39,6 @@ public:
         state = State::Decay;
       }
       break;
-
     case State::Decay:
       currentLevel -= decayDelta;
       if (currentLevel <= sustain) {
@@ -52,11 +46,9 @@ public:
         state = State::Sustain;
       }
       break;
-
     case State::Sustain:
       currentLevel = sustain;
       break;
-
     case State::Release:
       currentLevel -= releaseDelta;
       if (currentLevel <= 0.0f) {
@@ -65,29 +57,16 @@ public:
       }
       break;
     }
-
     return currentLevel;
-  }
+  };
 
-  void updateDelta() {
-    // Protect against short times causing infinity or division by zero
-    float safeAttack = attackInSec < 0.0001f ? 0.0001f : attackInSec;
-    float safeDecay = decayInSec < 0.0001f ? 0.0001f : decayInSec;
-    float safeRelease = releaseInSec < 0.0001f ? 0.0001f : releaseInSec;
-
-    attackDelta = 1.0f / (safeAttack * sampleRate);
-    decayDelta = (1.0f - sustain) / (safeDecay * sampleRate);
-    releaseDelta = sustain / (safeRelease * sampleRate);
-  }
-
-  // Setters
   void setAttack(float attackInSec_) {
     attackInSec = attackInSec_;
     updateDelta();
   }
 
-  void setDecay(float decayInSec_) {
-    decayInSec = decayInSec_;
+  void setDelay(float delayInSec_) {
+    decayInSec = delayInSec_;
     updateDelta();
   }
 
@@ -101,17 +80,44 @@ public:
     updateDelta();
   }
 
-  // External Controls
-  void noteOn() { state = State::Attack; }
-
-  void noteOff() { state = State::Release; }
+  void updateDelta() {
+    if (attackInSec < 0.0001f)
+      attackInSec = 0.0001f;
+    if (decayInSec < 0.0001f)
+      decayInSec = 0.0001f;
+    if (sustain < 0.0001f)
+      sustain = 0.0001f;
+    if (releaseInSec < 0.0001f)
+      releaseInSec = 0.0001f;
+    attackDelta = 1.0f / (attackInSec * sampleRate);
+    decayDelta = (1.0f - sustain) / (decayInSec * sampleRate);
+    releaseDelta = sustain / (releaseInSec * sampleRate);
+  }
 
   void reset() {
     state = State::Idle;
     currentLevel = 0.0f;
   }
 
-  State getState() const { return state; }
+  void noteOn() { state = State::Attack; };
+  void noteOff() { state = State::Release; };
 };
+
+int main() {
+  Envelope adsr;
+  adsr.prepare(44100.0f);
+  adsr.setAttack(0.01f); // 10ms
+  adsr.setSustain(0.5f);
+
+  std::cout << "--- ADSR Test Start ---" << std::endl;
+  adsr.noteOn();
+
+  for (int i = 0; i < 10; ++i) {
+    std::cout << "Sample " << i << ": " << adsr.processSample() << std::endl;
+  }
+
+  std::cout << "--- Test Complete ---" << std::endl;
+  return 0;
+}
 
 

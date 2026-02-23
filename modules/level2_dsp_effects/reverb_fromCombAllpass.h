@@ -1,4 +1,4 @@
-# pragma once
+﻿# pragma once
 
 # include "delay_comb_allpass.h"
 
@@ -80,4 +80,6 @@ public:
 	}
 
 };
+
+
 
