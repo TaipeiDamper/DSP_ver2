@@ -12,6 +12,7 @@
 - **07_AI_Permission_and_Protection_Rules.md**：AI 嚴禁在未經授權下修改「核心資產」。
 - **03_DSP_Coding_and_Architecture.md**：Level 0-3 的定義與 Real-time Safety 規則。
 - **01_Project_Overview_and_Goals.md**：長期目標與 Positive Grid JD。
+- **08_AI_Command_Aliases.md**：定義快捷指令（如 `status`）。
 
 ## 2. 讀取當前配置 (Flexible Configurations)
 請讀取 `AI_manage_area/01_Flexible_Configurations/`。

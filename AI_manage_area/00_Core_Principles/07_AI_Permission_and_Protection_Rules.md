@@ -4,7 +4,7 @@
 
 ## 1. 核心資產保護 (Core Asset Protection)
 以下目錄與檔案被定義為 **「核心資產 (Core Assets)」**：
-- **禁止修改 `modules/`**：AI 嚴禁在未經用戶針對「特定任務」明確授權的情況下，對 `modules/` 目錄下的任何內容進行寫入或修改（包含路徑修正）。AI 應保持此目錄為 Read-Only，僅作為檢索參考。
+- **禁止主動修改代碼 (No Proactive Code Modification)**：除特定任務指令外，AI **嚴禁** 在未經 USER 明確授權下修改任何專案中的程式碼（`.h`, `.cpp` 等）。所有的修改建議必須先以對話形式提出，獲得 USER 認可後方能透過工具執行。
 - **路徑解耦原則**：基於專案彈性，AI 應尊重用戶使用「扁平化 Include (如 #include "constant.h")」的設計，不應強制要求特定目錄層級的路徑。
 - **建議權限**：AI 應將所有優化建議優先實踐於 `experiments/` 資料夾中。
 - `AI_manage_area/00_Core_Principles/`：所有核心規則與啟動協定。

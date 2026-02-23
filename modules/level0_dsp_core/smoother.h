@@ -22,7 +22,7 @@ public:
 
   float processSample(float input_) {
     // float y = (1 - alpha) * y1 + alpha * input_;
-    float y = y1 + alpha * (input_ - y1);
+    float y = y1 + alpha * (input_ - y1); // save multiplication time
 
     // check if |y - input| is too small
     if (std::abs(y - input_) < 1e-6f) {
@@ -33,11 +33,10 @@ public:
     return y;
   }
 
-  float processBlock(float input_, float blocksize) {
+  void processBlock(float* buffer, int blocksize) {
     for (int i = 0; i < blocksize; i++) {
-      input_ = processSample(input_);
+      buffer[i] = processSample(buffer[i]);
     }
-    return input_;
   }
 
   void setTimeConst(float t_) {

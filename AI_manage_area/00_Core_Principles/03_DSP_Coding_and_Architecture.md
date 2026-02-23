@@ -36,8 +36,12 @@
     *   ❌ **No Heap Allocation**：嚴禁呼叫 `malloc`, `new`, `std::vector::resize` 等。
     *   ❌ **No I/O**：嚴禁在處理音訊時讀寫檔案或輸出 Log。
     *   ❌ **No Lock**：避免使用 Mutex，防止優先權反轉導致音訊中斷。
-3.  **指標使用時機**：
-    *   僅在需要 **共享資源**（如巨大的 Wavetable）或 **多型**（需慎用）時才使用 Raw 指標或引用。
+3.  **指標 (Pointer) 與 引用 (Reference) 的選擇**：
+    *   **指標 (`float*`)**：用於 **Buffer / 數組**。方便偏移運算 (`buffer[i]`)，與 C 語言 API 相容，且編譯器對指標遍歷的 SIMD 優化最成熟。
+    *   **引用 (`T&`)**：用於 **傳遞物件 (Object)** 或 **修改單一變數**。
+        *   好處：語法簡潔（像操作本地變數）、保證不為空值 (`Non-null`)。
+        *   時機：傳遞大型設定物件 (Const Ref)、JUCE 控制介面、或在 `auto&` 迴圈中修改容器內容。
+    *   **傳值 (`float`)**：用於 **單一樣本處理 (processSample)**。回傳值便於數學鏈接 (`y = filter.process(x)`)，且性能與引用相等。
 
 ---
 
