@@ -77,6 +77,12 @@ public:
     return buffer.readSample(delayInSample);
   }
   void writeSample(float input_) { buffer.writeSample(input_); }
+
+  void processBlock(float *inputBuffer, int blocksize) {
+    for (int i = 0; i < blocksize; i++) {
+      inputBuffer[i] = processSample(inputBuffer[i]);
+    }
+  }
 };
 
 /*
@@ -107,6 +113,12 @@ public:
     // y[n] = x[n] + g*x[n-M]
     float output = input_ + delayGain * bufferOutput;
     return output;
+  }
+
+  void processBlock(float *inputBuffer, int blocksize) {
+    for (int i = 0; i < blocksize; i++) {
+      inputBuffer[i] = processSample(inputBuffer[i]);
+    }
   }
 };
 

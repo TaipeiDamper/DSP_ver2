@@ -2,7 +2,7 @@
 
 // Ring buffer
 
-#include "level0_dsp_core/interpolation.h"
+#include "interpolation.h"
 #include <vector>
 
 class RingBuffer {
