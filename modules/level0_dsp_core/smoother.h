@@ -1,49 +1,50 @@
-﻿#include <cmath>
 
+
+#include <cmath>
 class ParamSmoother {
 protected:
+  float sampleRate = 44100.0f;
   float t = 0.2f;
   float alpha = 0.0f;
-  float sampleRate = 44100.0f;
   float y1 = 0.0f;
+  float targetValue = 0.0f;
 
 public:
-  ParamSmoother() {};
-
+  ParamSmoother() {}
   void prepare(float sampleRate_) {
     sampleRate = sampleRate_;
-    calAlpha();
+    setAlpha();
   }
-
-  void reset() {
-    y1 = 0.0f;
-    calAlpha();
-  };
-
-  float processSample(float input_) {
-    // float y = (1 - alpha) * y1 + alpha * input_;
-    float y = y1 + alpha * (input_ - y1); // save multiplication time
-
-    // check if |y - input| is too small
-    if (std::abs(y - input_) < 1e-6f) {
-      y = input_;
+  void reset() { y1 = 0.0f; }
+  float processSample() {
+    // thresholding
+    if (std::abs(targetValue - y1) < 1e-6f) {
+      y1 = targetValue;
+      return y1;
     }
 
-    y1 = y; // pass to next calculate
+    float y = y1 + alpha * (targetValue - y1);
+    y1 = y;
     return y;
   }
-
-  void processBlock(float* buffer, int blocksize) {
-    for (int i = 0; i < blocksize; i++) {
-      buffer[i] = processSample(buffer[i]);
-    }
-  }
+  void setTarget(float newTargetValue) { targetValue = newTargetValue; }
 
   void setTimeConst(float t_) {
     t = t_;
-    calAlpha();
+    if (t < 0.001f) {
+      t = 0.001f;
+    }
+    setAlpha();
   }
 
+  void processBlock(float *buffer, int numSamples) {
+    for (int i = 0; i < numSamples; i++) {
+      buffer[i] = processSample();
+    }
+  }
+
+  void jumpToTarget() { y1 = targetValue; }
+
 protected:
-  void calAlpha() { alpha = 1.0f - std::expf(-1.0f / (t * sampleRate)); }
+  void setAlpha() { alpha = 1.0f - expf(-1.0f / (t * sampleRate)); }
 };
