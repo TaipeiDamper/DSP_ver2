@@ -10,7 +10,11 @@
 - [x] **邏輯修正 - `processBlock`**：已改為接收浮點數指標並進行區塊平滑處理。
 - [x] **計算優化 - 一次乘法**：已手動更新數學公式，並通過 `test_smoother.cpp` 驗證。
 - [x] **架構重構 - Target-based**：實作 `setTarget` 邏輯，與音訊線程解耦。
-- [ ] **功能擴展 - 線性平滑**：新增線性平滑模式支援（可選任務）。
+### 🟡 基礎模組驗證與整合 [進行中]
+- [ ] **Biquad 頻率響應驗證**：撰寫 `test_filter.cpp` 並分析 LPF/HPF 是否產生數值爆炸或漂移。
+- [ ] **JUCE 接口實驗**：在 `experiments/` 建立一個極簡 JUCE 專案，嘗試將 `DSP_ver2/modules` 掛載進去。
+- [ ] **AI Audio 原型嘗試**：整理現有的 LSTM 對照組數據，研究如何透過 `RTNeural` 或自行撰寫矩陣運算加載權重。
+- [ ] **Compressor 核心開發**：實作 Envelope Follower，這是串接 AI 建模前的動態控制基石。
 
 ---
 
