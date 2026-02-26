@@ -71,8 +71,13 @@ public:
     x1 = input_;
     y2 = y1;
     y1 = output;
-
     return output;
+  }
+
+  void processBlock(float *buffer, int numSamples) {
+    for (int i = 0; i < numSamples; i++) {
+      buffer[i] = processSample(buffer[i]);
+    }
   }
 
 private:
