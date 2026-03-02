@@ -10,15 +10,15 @@
 - [x] **邏輯修正 - `processBlock`**：已改為接收浮點數指標並進行區塊平滑處理。
 - [x] **計算優化 - 一次乘法**：已手動更新數學公式，並通過 `test_smoother.cpp` 驗證。
 - [x] **架構重構 - Target-based**：實作 `setTarget` 邏輯，與音訊線程解耦。
-### 🔴 CMake 基礎建設與深度學習 [新優先]
-- [ ] **建立全域 CMake 架構**：實作「鏈結式」標頭檔引用，解決目前測試檔案找不到標頭檔的紅字問題。
-- [ ] **熟悉 CMake 語法與邏輯**：克服對 CMake 的敬畏感，學習如何靈活管理模組間的依賴關係（Target-based modern CMake）。
+### 🟢 CMake 基礎建設與深度學習 [已完成]
+- [x] **建立全域 CMake 架構**：已實作 INTERFACE/STATIC 庫傳遞機制，解決路徑引用問題。
+- [x] **熟悉 CMake 語法與邏輯**：成功掌握 Target-based modern CMake，並建立 `./test` 自動化流程。
 
-### 🟡 基礎模組驗證與整合 [進行中]
-- [ ] **Biquad 脈衝響應驗證 (Impulse Response)**：
-    - [ ] 撰寫 `test_1st_half.cpp`：生成 Impulse 並透過 `processBlock` 獲取數據。
-    - [ ] 撰寫 `test_2nd_half.py`：透過 FFT 分析頻率響應並作圖。
-    - [ ] 檢查數值穩定性（是否產生爆炸/NaN）。
+### 🟢 基礎模組驗證與整合 [已完成]
+- [x] **Biquad 脈衝響應驗證 (Impulse Response)**：
+    - [x] 撰寫 `test_1st_half.cpp`：生成 Impulse 並輸出 WAV。
+    - [x] 撰寫 `test_2nd_half.py`：透過 FFT 分析頻率響應並作圖。
+    - [x] **建立一鍵自動化 `./test` 指令**：整合編譯、執行與繪圖流程。
 - [ ] **JUCE 接口實驗**：在 `experiments/` 建立一個極簡 JUCE 專案，嘗試將 `DSP_ver2/modules` 掛載進去。
 - [ ] **AI Audio 原型嘗試**：整理現有的 LSTM 對照組數據，研究如何透過 `RTNeural` 或自行撰寫矩陣運算加載權重。
 - [ ] **Compressor 核心開發**：實作 Envelope Follower，這是串接 AI 建模前的動態控制基石。

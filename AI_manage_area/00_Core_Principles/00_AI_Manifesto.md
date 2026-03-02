@@ -27,6 +27,10 @@
 | **`review`** | 練習結束、階段總結 | 進行產值評估、效率分析與技術債檢查，並給予評分 (S/A/B/C)。 |
 | **`target`** | 重新校準宏觀方向 | **無參數**：執行宏觀戰略審計（能力矩陣、下一步大棋）。 |
 | **`target -today`** | 微觀進度核對 | 核對今日代碼是否精準對齊職位需求，避免無效開發。 |
+| **`test`** | 演算法驗證 | 執行 `./test.ps1` 流程並總結 C++ 產出的數據與 Python 分析圖表。 |
+
+> [!IMPORTANT]
+> **擴充指令集**：更多針對開發流程的動態快捷指令，請見：[03_Command_Shortcuts.md](file:///c:/Users/ASAHI/Desktop/Personal_Research/DSP_ver2/AI_manage_area/01_Flexible_Configurations/03_Command_Shortcuts.md)。
 
 ---
 
