@@ -19,24 +19,28 @@
     - [x] 撰寫 `test_1st_half.cpp`：生成 Impulse 並輸出 WAV。
     - [x] 撰寫 `test_2nd_half.py`：透過 FFT 分析頻率響應並作圖。
     - [x] **建立一鍵自動化 `./test` 指令**：整合編譯、執行與繪圖流程。
+- [x] **ADSR 狀態機視覺化驗證**：
+    - [x] 成功將 `Envelope` 升級為支援 Linear/Exponential 混合模式。
+    - [x] 實作物理時間對齊 ($5\tau$) 與接力同步邏輯。
+    - [x] 透過 `./test` 視覺化驗證 re-trigger 行為。
 - [ ] **JUCE 接口實驗**：在 `experiments/` 建立一個極簡 JUCE 專案，嘗試將 `DSP_ver2/modules` 掛載進去。
 - [ ] **AI Audio 原型嘗試**：整理現有的 LSTM 對照組數據，研究如何透過 `RTNeural` 或自行撰寫矩陣運算加載權重。
-- [ ] **Compressor 核心開發**：實作 Envelope Follower，這是串接 AI 建模前的動態控制基石。
+
+### 🟡 動態處理器 (Compressor) [研發中]
+- [ ] **閱讀與架構設計**：研讀 JAES 論文，並參考 [01_Architecture_Blueprint.md](file:///c:/Users/ASAHI/Desktop/Personal_Research/DSP_ver2/CPP_learning/dsp_theory_notes/compressor/01_Architecture_Blueprint.md) 的 4 大核心模塊。
+- [ ] 實作 Envelope Follower (峰值或 RMS 檢測)，並透過 Python 視覺化驗證。
+- [ ] 實作 Static Curve (增益電腦) 與 Ballistics (非對稱 Attack/Release 平滑器)。
+- [ ] 完成包含 Threshold, Ratio, Attack, Release 控制的完整 Feed-forward Compressor 模組。
 
 ---
 
 ## 2. 後續開發任務 (Upcoming Development)
 
 ### 🟢 Biquad Filter 基礎實作 [已完成]
-- [x] 實作純 C++ 二階濾波器類別 (RBJ 結構)。
-- [ ] **驗證實作**：撰寫測試腳本驗證各類型濾波器的頻率響應。
-- [ ] 深入濾波器係數計算優化（與標準理論對齊）。
-- [ ] 穩定性測試與定點運算評估。
-
-### 🟡 動態處理器 (Compressor)
-- [ ] 實作 Envelope Follower (峰值檢測)。
-- [ ] 實作 Side-chain 邏輯。
-- [ ] 完成包含 Attack/Release 控制的完整 Compressor 模組。
+- [x] 實作純 C++ 二階濾波器類別 (RBJ 結構) (已重構為單一類別設計)。
+- [x] **驗證實作**：撰寫測試腳本驗證各類型濾波器的頻率響應（LPF, HPF, BPF, Shelf 等），確認 -3dB 截止點與滾降斜率。
+- [x] 深入濾波器係數計算優化（已確認與 RBJ Cookbook 標準對齊）。
+- [x] 批次穩定性測試與圖表量測評估（全家族圖線驗證通過）。
 
 ### 🔴 跨平台與測試框架
 - [ ] 建立 GTest 或簡單的自動化 Unit Testing 流程。

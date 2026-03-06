@@ -15,7 +15,10 @@ public:
     sampleRate = sampleRate_;
     setAlpha();
   }
-  void reset() { y1 = 0.0f; }
+  void reset() {
+    y1 = 0.0f;
+    targetValue = 0.0f;
+  }
   float processSample() {
     // thresholding
     if (std::abs(targetValue - y1) < 1e-6f) {
@@ -29,22 +32,31 @@ public:
   }
   void setTarget(float newTargetValue) { targetValue = newTargetValue; }
 
-  void setTimeConst(float t_) {
-    t = t_;
-    if (t < 0.001f) {
-      t = 0.001f;
-    }
-    setAlpha();
-  }
-
   void processBlock(float *buffer, int numSamples) {
     for (int i = 0; i < numSamples; i++) {
       buffer[i] = processSample();
     }
   }
 
-  void jumpToTarget() { y1 = targetValue; }
+  void setCurrentValue(float value) { y1 = value; }
+
+  void setTimeToTarget(float timeInSec) {
+    // 5.0f is the factor that the value will approach to target value by 99%
+    const float toTarget99Factor = 5.0f;
+    setTimeConst(timeInSec / toTarget99Factor);
+  }
 
 protected:
+  // update change coeff of approaching line
   void setAlpha() { alpha = 1.0f - expf(-1.0f / (t * sampleRate)); }
+
+  // set time const for updating
+  // over "t" sec, the value will approach to target value by 63.2%
+  void setTimeConst(float t_) {
+    t = t_;
+    if (t < 0.0001f) {
+      t = 0.0001f;
+    }
+    setAlpha();
+  }
 };

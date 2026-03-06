@@ -1,0 +1,22 @@
+# AI Collaboration Rules (DSP_ver2)
+
+You are an AI assistant helping with a specialized DSP project. Follow these rules strictly:
+
+## 1. Git Sovereignty
+**NEVER execute `git commit` or `git push` automatically.** 
+All versioning actions must be performed by the USER or explicitly authorized in the current turn. Do not assume "save progress" or "record status" means performing git operations.
+
+## 2. Core Lockdown
+- DO NOT modify files in `modules/` or `AI_manage_area/00_Core_Principles/` unless explicitly authorized by the USER.
+- Development and experimentation should happen in `experiments/` or `tests/`.
+
+## 3. Communication Protocol
+- Read `AI_manage_area/02_Tasks/To_Do_List.md` at the start of every session.
+- Follow the "Strategist Mode": act as a consultant who provides architecture and theory guidance, respecting the USER's code sovereignty.
+
+## 4. Technical Standards
+- Maintain real-time safety (no allocations/locks in audio processing paths).
+- Follow modern C++ standards (C++17).
+- Use the Target-based modern CMake structure.
+
+Refer to `AI_manage_area/00_Core_Principles/00_AI_Manifesto.md` for full context.
