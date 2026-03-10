@@ -36,6 +36,12 @@ Compressor 本質上是一個「**自動調整音量的機器人**」。相較�
     *   當我們釋放壓縮 (Gain 變大) 時，時間常數套用 **Release Time**，計算出 $\alpha_R$。
     *   這與我們實作 ParamSmoother 的概念極為相似，只是係數根據訊號前進方向動態切換。
 
+    > **💡 實作陷阱：為什麼不直接在 Compressor 中複用 `ParamSmoother` 類別？**
+    > 雖然底層數學都是一階濾波器，但 Compressor 的平滑器有三大特殊需求，導致無法直接套用現成的 `ParamSmoother`：
+    > 1. **雙重時間常數 (Dual Time Constants)**：Compressor 需要同時具備 Attack 與 Release 兩個係數。若使用 `ParamSmoother`，每個 sample 都要判斷方向並呼叫 `setTimeToTarget()`。
+    > 2. **狀態連續性 (Shared State)**：若用兩個 Smoother 實作，它們內部的「記憶值 (y1)」會分開儲存，導致切換時包絡線產生跳變。我們需要的是「同一組記憶值，套用不同的係數」。
+    > 3. **效能考量 (Performance)**：`ParamSmoother` 會在設定時計算 `expf()` 指數運算。如果在 `processSample` 裡頻繁切換參數，會極度消耗 CPU。在 Compressor 中，我們會在 `prepare` 時先算好 `alphaAttack` 與 `alphaRelease` 存起來。
+
 ### 4. 增益應用器 (Gain Application / VCA)
 *   **目標**：將最終平滑後的 Gain 數值，乘回原始輸入訊號上。
 *   **數學實作原理**：
