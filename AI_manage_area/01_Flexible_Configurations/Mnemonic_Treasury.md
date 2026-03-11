@@ -26,4 +26,18 @@
 *   ❌ **No Blocking**：禁止使用 Mutex 或耗時長的 Lock。
 
 ---
-*最後更新：2026-02-24*
+
+## 4. DSP 運算安全：除以零的「防火牆」
+
+> **「只要看見除號，就要像看到火。沒先放上 IF，代碼會著火。」**
+
+*   **風險點**：在線性空間計算 Gain 或 Normalization 時（如 `target / envelope`），若訊號靜音，分母為零會導致 **NaN/INF**。
+*   **防火牆實作**：
+    ```cpp
+    float gainFactor = (denominator > 0.00001f) ? (numerator / denominator) : 1.0f;
+    ```
+*   **原則**：永遠在除法前進行最小正數 (Epsilon) 檢查，或確保分母具備安全的預設值。
+
+---
+*最後更新：2026-03-11*
+

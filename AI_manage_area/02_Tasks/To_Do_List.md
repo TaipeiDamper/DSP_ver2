@@ -27,10 +27,11 @@
 - [ ] **AI Audio 原型嘗試**：整理現有的 LSTM 對照組數據，研究如何透過 `RTNeural` 或自行撰寫矩陣運算加載權重。
 
 ### 🟡 動態處理器 (Compressor) [研發中]
-- [ ] **閱讀與架構設計**：研讀 JAES 論文，並參考 [01_Architecture_Blueprint.md](file:///c:/Users/ASAHI/Desktop/Personal_Research/DSP_ver2/CPP_learning/dsp_theory_notes/compressor/01_Architecture_Blueprint.md) 的 4 大核心模塊。
-- [ ] 實作 Envelope Follower (峰值或 RMS 檢測)，並透過 Python 視覺化驗證。
-- [ ] 實作 Static Curve (增益電腦) 與 Ballistics (非對稱 Attack/Release 平滑器)。
-- [ ] 完成包含 Threshold, Ratio, Attack, Release 控制的完整 Feed-forward Compressor 模組。
+- [x] **閱讀與架構設計 [2026-03-11]**：研讀 JAES 論文，並完成 V1 基礎線性架構設計。
+- [x] **Envelope Follower 實作 [2026-03-11]**：完成一階 IIR 峰值檢測邏輯，支援非對稱 Attack/Release。
+- [x] **Static Curve 基礎邏輯 [2026-03-11]**：完成線性空間 (Linear Domain) 的增益縮放公式。
+- [ ] 完成包含 Threshold, Ratio, Attack, Release 控制的完整 Feed-forward Compressor 模組 (V1.1 封裝)。
+- [ ] 進階 V2 (dB Domain) 轉換與 Soft-knee 實作。
 
 ---
 

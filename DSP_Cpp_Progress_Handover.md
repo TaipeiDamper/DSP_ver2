@@ -134,3 +134,14 @@ C++（現代 C++，偏重 audio real-time 設計） - JUCE framework - DSP
 ------------------------------------------------------------------------
 
 此文件可作為其他 AI 之進度繼承依據。
+
+### 2026-03-11 進度更新
+
+-   **實作主題**：Compressor V1 (Linear Domain)
+-   **關鍵概念**：
+    -   一階 IIR 封包追蹤 (Envelope Follower) 與 Alpha 係數計算 ($e^{-2.2 / (f_s \cdot T)}$)。
+    -   線性空間的 Gain Reduction 邏輯：`TargetLevel / Envelope`。
+-   **技術筆記**：深刻意識到 [除以零 (Divide-by-Zero)] 的安全檢查在 DSP 中的重要性。
+-   **AI 協作**：重新整編 `AI_manage_area` 並建立 `dsp_learning_strategist` Skill，統一了協作規範。
+-   **狀態**：V1 邏輯已完成。下次將挑戰手寫 V1.1 (複習) 或進階到 V2 (dB Domain)。
+
