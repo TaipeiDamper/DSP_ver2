@@ -8,8 +8,7 @@ protected:
   float releaseInSec = 0.02f;
   float attackAlpha = 0.0001f;
   float releaseAlpha = 0.0001f;
-  float lastSample = 0.0f;
-  float envelope = 1.0f;
+  float envelope = 0.0f;
   float threshold = 0.5f;
   float ratio = 2.0f;
   float gain = 1.0f;
@@ -23,9 +22,7 @@ public:
     float inputAbs = std::abs(input_);
 
     // 1. detect input to decide which alpha to use
-    float currentAlpha =
-        (inputAbs > std::abs(lastSample)) ? attackAlpha : releaseAlpha;
-    lastSample = input_;
+    float currentAlpha = (inputAbs > envelope) ? attackAlpha : releaseAlpha;
 
     // 2. detect input to produce envelope (which represent current volume
     // level)

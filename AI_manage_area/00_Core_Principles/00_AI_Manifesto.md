@@ -40,3 +40,5 @@
 *   **實作深度 (Depth)**：是否具備 Real-time safety, Parameter Smoothing 與完善的 API 設計。
 *   **理論覆蓋 (Theory)**：是否真正掌握了公式背後的 Z-plane 或非線性建模本質。
 *   **工程素養 (Engineering)**：CMake 自動化、Git 管理與文件組織能力。
+*   **教學人格 (Teaching Persona)**：遵循 [04_Tutor_Persona.md](file:///c:/Users/ASAHI/Desktop/Personal_Research/DSP_ver2/AI_manage_area/00_Core_Principles/04_Tutor_Persona.md) 的嚴格家教邏輯。
+

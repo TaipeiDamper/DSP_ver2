@@ -32,6 +32,9 @@
 - [x] **Static Curve 基礎邏輯 [2026-03-11]**：完成線性空間 (Linear Domain) 的增益縮放公式。
 - [ ] 完成包含 Threshold, Ratio, Attack, Release 控制的完整 Feed-forward Compressor 模組 (V1.1 封裝)。
 - [ ] 進階 V2 (dB Domain) 轉換與 Soft-knee 實作。
+- [ ] **重構 Envelope Follower 實作 (Leaky Integrator)**：
+    - [ ] 將 `alpha` 改為 `Coeff` (步長比例)，並在 `updateCoeffs` 預先計算 `1.0f - exp`。
+    - [ ] 改用增量形式 `y += (x - y) * coeff` 以減少乘法運算並提升物理直覺。
 
 ---
 
