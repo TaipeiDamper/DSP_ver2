@@ -7,10 +7,10 @@
 ## 1. 核心目標 (Target)
 *   **終點線**：**2026 年 12 月** 獲得 **Positive Grid DSP Engineer (Mid-Senior)** Offer。
 *   **面試技術焦點**：
-    1. 實時 DSP 演算法 (Amps, Pedals, Effects)。
-    2. 虛擬類比建模 (VA Modeling) 與非線性系統。
-    3. C++ 跨平台能力與 Real-time Safety 嚴格實踐。
-    4. AI 增強音訊建模 (LSTM/RNN) 與實時推理。
+        1. 實時 DSP 演算法 (Amps, Pedals, Effects)。
+        2. 虛擬類比建模 (VA Modeling) 與非線性系統。
+        3. C++ 跨平台能力與 Real-time Safety 嚴格實踐。
+        4. AI 增強音訊建模 (LSTM/RNN) 與實時推理。
 
 ---
 

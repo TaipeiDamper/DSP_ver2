@@ -16,13 +16,13 @@
 
 ### 🟢 基礎模組驗證與整合 [已完成]
 - [x] **Biquad 脈衝響應驗證 (Impulse Response)**：
-    - [x] 撰寫 `test_1st_half.cpp`：生成 Impulse 並輸出 WAV。
-    - [x] 撰寫 `test_2nd_half.py`：透過 FFT 分析頻率響應並作圖。
-    - [x] **建立一鍵自動化 `./test` 指令**：整合編譯、執行與繪圖流程。
+        - [x] 撰寫 `test_1st_half.cpp`：生成 Impulse 並輸出 WAV。
+        - [x] 撰寫 `test_2nd_half.py`：透過 FFT 分析頻率響應並作圖。
+        - [x] **建立一鍵自動化 `./test` 指令**：整合編譯、執行與繪圖流程。
 - [x] **ADSR 狀態機視覺化驗證**：
-    - [x] 成功將 `Envelope` 升級為支援 Linear/Exponential 混合模式。
-    - [x] 實作物理時間對齊 ($5\tau$) 與接力同步邏輯。
-    - [x] 透過 `./test` 視覺化驗證 re-trigger 行為。
+        - [x] 成功將 `Envelope` 升級為支援 Linear/Exponential 混合模式。
+        - [x] 實作物理時間對齊 ($5\tau$) 與接力同步邏輯。
+        - [x] 透過 `./test` 視覺化驗證 re-trigger 行為。
 - [ ] **JUCE 接口實驗**：在 `experiments/` 建立一個極簡 JUCE 專案，嘗試將 `DSP_ver2/modules` 掛載進去。
 - [ ] **AI Audio 原型嘗試**：整理現有的 LSTM 對照組數據，研究如何透過 `RTNeural` 或自行撰寫矩陣運算加載權重。
 
@@ -33,8 +33,8 @@
 - [ ] 完成包含 Threshold, Ratio, Attack, Release 控制的完整 Feed-forward Compressor 模組 (V1.1 封裝)。
 - [ ] 進階 V2 (dB Domain) 轉換與 Soft-knee 實作。
 - [ ] **重構 Envelope Follower 實作 (Leaky Integrator)**：
-    - [ ] 將 `alpha` 改為 `Coeff` (步長比例)，並在 `updateCoeffs` 預先計算 `1.0f - exp`。
-    - [ ] 改用增量形式 `y += (x - y) * coeff` 以減少乘法運算並提升物理直覺。
+        - [ ] 將 `alpha` 改為 `Coeff` (步長比例)，並在 `updateCoeffs` 預先計算 `1.0f - exp`。
+        - [ ] 改用增量形式 `y += (x - y) * coeff` 以減少乘法運算並提升物理直覺。
 
 ---
 

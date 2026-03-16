@@ -17,20 +17,20 @@
 ## 2. DSP 撰寫規範 (Real-time Audio)
 1. **Pure DSP 原則**：L0-L2 完全不應出現 `juce::` 命名空間，保持演算法透明。
 2. **Audio Thread 禁忌**：
-    *   ❌ **No Heap Allocation** (Malloc/New)
-    *   ❌ **No I/O** (Logging/Printing/File Access)
-    *   ❌ **No Locking** (Mutex/Blocking Calls)
+        *   ❌ **No Heap Allocation** (Malloc/New)
+        *   ❌ **No I/O** (Logging/Printing/File Access)
+        *   ❌ **No Locking** (Mutex/Blocking Calls)
 3. **數據通訊選擇**：
-    *   **指標 (`float*`)**：用於 **Worker (做事)**。適合樣本流水線，利於編譯器 SIMD 優化。
-    *   **引用 (`T&`)**：用於 **Supervisor (傳資源)**。適合物件傳遞、確保非空安全性。
+        *   **指標 (`float*`)**：用於 **Worker (做事)**。適合樣本流水線，利於編譯器 SIMD 優化。
+        *   **引用 (`T&`)**：用於 **Supervisor (傳資源)**。適合物件傳遞、確保非空安全性。
 
 ---
 
 ## 3. 現代化 CMake 與 VS 流程
 *   **模式**：開啟 Visual Studio 選擇「開啟資料夾 (Folder View)」開啟 `DSP_ver2` 根目錄。
 *   **指令**：
-    *   `cmake -B build`：配置環境並生成緩存。
-    *   `cmake --build build --target [Name]`：從命令列編譯特定目標。
+        *   `cmake -B build`：配置環境並生成緩存。
+        *   `cmake --build build --target [Name]`：從命令列編譯特定目標。
 *   **測試流程**：在 `experiments/console_tests/` 新增 `.cpp` 並寫入 `main`，CMake 將自動偵測並生成執行目標。
 
 ---

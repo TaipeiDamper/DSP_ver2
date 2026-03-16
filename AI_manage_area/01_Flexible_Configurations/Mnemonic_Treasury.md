@@ -33,9 +33,9 @@
 
 *   **風險點**：在線性空間計算 Gain 或 Normalization 時（如 `target / envelope`），若訊號靜音，分母為零會導致 **NaN/INF**。
 *   **防火牆實作**：
-    ```cpp
-    float gainFactor = (denominator > 0.00001f) ? (numerator / denominator) : 1.0f;
-    ```
+        ```cpp
+        float gainFactor = (denominator > 0.00001f) ? (numerator / denominator) : 1.0f;
+        ```
 *   **原則**：永遠在除法前進行最小正數 (Epsilon) 檢查，或確保分母具備安全的預設值。
 
 ---

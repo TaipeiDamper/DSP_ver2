@@ -1,65 +1,73 @@
-﻿// not complete
+// not complete
 #include <cmath>
 
-class Compressor {
-protected:
-  float sampleRate = 44100.0f;
-  float attackInSec = 0.005f;
-  float releaseInSec = 0.02f;
-  float attackAlpha = 0.0001f;
-  float releaseAlpha = 0.0001f;
-  float envelope = 0.0f;
-  float threshold = 0.5f;
-  float ratio = 2.0f;
-  float gain = 1.0f;
+class Compressor
+{
+  protected:
+    float sampleRate = 44100.0f;
+    float coeff = 0.0f;
+    float attackInSec = 0.01f;
+    float releaseInSec = 0.1f;
+    float attackCoeff = 0.0f;
+    float releaseCoeff = 0.0f;
+    float envelope = 0.0f;
 
-public:
-  Compressor() {};
-  void prepare(float sampleRate) { sampleRate = sampleRate; };
-  void reset() {};
+    float threshold = 0.5f;
+    float ratio = 4.0f;
+    float makeupGain = 1.0f;
 
-  float processSample(float input_) {
-    float inputAbs = std::abs(input_);
+  public:
+    Compressor() {};
 
-    // 1. detect input to decide which alpha to use
-    float currentAlpha = (inputAbs > envelope) ? attackAlpha : releaseAlpha;
-
-    // 2. detect input to produce envelope (which represent current volume
-    // level)
-    envelope = (1.0f - currentAlpha) * inputAbs + currentAlpha * envelope;
-
-    // 3. apply compression to envelope
-    float targetLevel = 0.0f;
-    if (envelope > threshold) {
-      targetLevel = threshold + (envelope - threshold) / ratio;
-    } else {
-      targetLevel = envelope;
+    void prepare(float sampleRate_)
+    {
+        sampleRate = sampleRate_;
+        updateAlphas();
     }
 
-    // 4. apply gain and envelope to input
-    float compressRatio = envelope > 0.0001f ? (targetLevel / envelope) : 1.0f;
-    float output = gain * input_ * compressRatio;
+    float processSample(float input_)
+    {
+        // 01 Envelope follower
+        float inputAbs = std::abs(input_);
+        float coeff = (inputAbs > envelope) ? attackCoeff : releaseCoeff;
+        envelope = (1.0f - coeff) * inputAbs + coeff * envelope;
 
-    return output;
-  };
-  void processBlock(float *buffer, int numSamples) {};
+        // 02 Gain Compute
+        float gain = (envelope > threshold) ? (threshold + (envelope - threshold) / ratio) / envelope : 1.0f;
 
-  // setters =============================================================
-  void setAttackInSec(float attackInSec_) {
-    attackInSec = attackInSec_;
-    updateAlphas();
-  }
-  void setReleaseInSec(float releaseInSec_) {
-    releaseInSec = releaseInSec_;
-    updateAlphas();
-  }
+        // 03 Gain Application
+        float output = input_ * gain * makeupGain;
+        return output;
+    }
 
-private:
-  void updateAlphas() {
-    // pre-calculate the exponential smoothing factors
-    // since normal alpha would only bring 63% change in time t
-    // multiplied the value by 5 to make it faster
-    attackAlpha = std::exp(-2.2f / (sampleRate * attackInSec));
-    releaseAlpha = std::exp(-2.2f / (sampleRate * releaseInSec));
-  }
+    // setter
+    void setThreshold(float threshold_)
+    {
+        threshold = threshold_;
+    }
+    void setRatio(float ratio_)
+    {
+        ratio = ratio_;
+    }
+    void setMakeupGain(float makeupGain_)
+    {
+        makeupGain = makeupGain_;
+    }
+    void setAttackInSec(float attackInSec_)
+    {
+        attackInSec = attackInSec_;
+        updateAlphas();
+    }
+    void setReleaseInSec(float releaseInSec_)
+    {
+        releaseInSec = releaseInSec_;
+        updateAlphas();
+    }
+
+  protected:
+    void updateAlphas()
+    {
+        attackCoeff = std::exp(-2.2f / (sampleRate * attackInSec));
+        releaseCoeff = std::exp(-2.2f / (sampleRate * releaseInSec));
+    }
 };
