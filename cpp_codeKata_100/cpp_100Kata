@@ -1,0 +1,171 @@
+# C++ DSP 100 Code Kata Master List
+
+## 為什麼要重構這份清單？ (教學與實戰導向)
+原本的 5 個階段跨度太大，比如第一階段直接混雜了 Buffer、Smooth、甚至 Oscillator，容易導致學習卡點。
+這次的改版分為 **10 個微型衝刺 (Sprints)**，每個階段 10 題。
+**核心原則：從純數學 -> 記憶操作 -> 狀態管理 -> 聲音塑造 -> 系統整合。**
+這條路徑完美對齊 Positive Grid 等音訊公司的面試要求，並且能確保你不會在前期被挫折感擊垮。
+
+---
+
+### Sprint 1: Basic Math & Interpolation (純數學與插值)
+*重點：完全不涉及狀態儲存，純粹的即時運算。這是最不會卡關，但每天都會用到的底層。*
+001. Decibel to Linear Conversion (`std::pow` 與近似)
+002. Linear to Decibel Conversion (`std::log10` 與安全防護)
+003. Linear Interpolation (Lerp) (給兩點找中間值)
+004. Pan Pot - Linear (線性左右平移)
+005. Pan Pot - Constant Power (等功率平移，避免中間音量凹陷)
+006. Fast Absolute Value (DSP 面試必考：不用 `if` 處理絕對值)
+007. Simple Hard Clipper (`std::clamp`)
+008. Soft Clipper (tanh，數學函數應用)
+009. Parameter Normalization ( mapping 0-1 to a range)
+010. Simple Noise Gate (純粹的 threshold 判斷)
+
+### Sprint 2: Buffer & Memory Operations (記憶體與指標)
+*重點：開始學習如何安全地處理 C++ 最麻煩的 Array 和 Buffer。音訊就是 Array processing。*
+011. Buffer Clear/Mute (用 `std::fill` 或 `memset`)
+012. Buffer Copy (拷貝音訊數據)
+013. Vector Addition / Mixing (兩個訊號相加)
+014. Vector Application of Gain (針對整個陣列套用音量)
+015. Stereo Interleaving (將 LLL RRR 轉成 LRLRLR)
+016. Stereo De-interleaving (解碼)
+017. Circular Buffer - Write (存入環形緩衝)
+018. Circular Buffer - Read (取出環形緩衝)
+019. Mono to Stereo Upmixer (單聲道複製)
+020. Mid-Side (M/S) Encoder (矩陣轉換 `M = L+R`, `S = L-R`)
+
+### Sprint 3: Smoothers & Envelopes (狀態與平滑化)
+*重點：第一次引入「狀態 (State)」。類別裡面要有變數記住上一個 sample發生了什麼事。*
+021. Linear parameter smoothing (避免爆音的必備技巧)
+022. One-pole Lowpass Filter / RC Smoother (這也是一種平滑器)
+023. Simple Envelope Generator - Attack (只有 Attack 的破音漸進)
+024. Simple Envelope Generator - Release (只有 Release 的尾音)
+025. AR Envelope (Attack / Release 結合)
+026. Peak Level Detector (找尋 Buffer 內最大值並 decay)
+027. RMS Level Detector (均方根音量偵測)
+028. DC Offset Removal Filter (1st order highpass 變形)
+029. ADSR State Machine (狀態機邏輯，面試超愛考)
+030. Zero Crossing Detector (找頻率或基礎 Pitch Detection)
+
+### Sprint 4: Basic Filters (線性濾波器基礎)
+*重點：Positive Grid 的核心 "Strong understanding of filters"。這階段要熟悉差分方程。*
+031. 1st Order Lowpass (係數計算與實作)
+032. 1st Order Highpass
+033. All-pass Filter (1st order，Phase shift)
+034. Biquad Lowpass (Direct Form I)
+035. Biquad Highpass (Direct Form I)
+036. Biquad Bandpass
+037. Biquad Peaking EQ
+038. Biquad Direct Form II (記憶體優化，改變儲存方式)
+039. Coefficient Smoothing for Biquad (如何在參數改變時不炸雷)
+040. Bilinear Transform helper (模擬類比電路到數位的第一步)
+
+### Sprint 5: Distortion & Saturation (音箱建模地基)
+*重點：開始做「好聽」的東西，PG 最愛的破音。*
+041. Asymmetric Diode Clipping (不對稱破音)
+042. Foldback Distortion (波浪型失真)
+043. Polynomial Waveshaper (用多項式自製破音曲線)
+044. Bitcrusher (Bit 降級處理)
+045. Sample Rate Reducer (Decimation 產生 Aliasing)
+046. Overdrive with Pre/Post EQ (簡單的效果器 Chain)
+047. Tube Saturation emulation (軟失真+非線性)
+048. Transient Designer - Attack Phase (加強敲擊聲)
+049. Soft Clipper with Lookup Table (用查表法加速 tanh)
+050. Multi-band Splitter (用 Linkwitz-Riley 切開低頻與高頻以便分別破音)
+
+### Sprint 6: Dynamics Processing (動態壓縮 - 最難的檻)
+*重點：你之前卡住的 Compressor 會在這裡徹底解決。它就是 Env + Math + Smoother 的總和。*
+051. Static Compression Curve (根據 Threshold/Ratio 計算目標 Gain)
+052. Envelope Follower for Compressor (專用版，對數空間)
+053. Feed-forward Compressor (結合前面兩者)
+054. Soft Knee Calculation (平滑過渡帶)
+055. Auto Make-up Gain logic (自動補償音量)
+056. Limiter lookahead buffer (預見未來以防止爆音)
+057. Simple Noise Gate with Hysteresis (防止閘門一直快速開關)
+058. Upward Expander
+059. Parallel (New York) Compression routing
+060. Sidechain Ducking logic
+
+### Sprint 7: Delays & Spatial (延遲與空間效果)
+*重點：大量使用 Circular Buffer 與 Lerp 插值。*
+061. Basic Delay Line (整數 Sample 延遲)
+062. Fractional Delay Line (帶 Lerp 的小數點延遲，避免變更延遲時間時爆音)
+063. Feed-forward Comb Filter
+064. Feedback Comb Filter (帶有回授，Reverb 的基礎)
+065. Ping-Pong Delay (跨聲道)
+066. Haas Effect Stereo Widener (利用短延遲產生寬度)
+067. Schroeder Reverb Model (Allpass + Comb 組合)
+068. Tape Delay Pitch wow logic (改變 buffer 讀取速度)
+069. Doppler Effect math (都卜勒公式套用)
+070. Mid-Side Decoder (利用前面寫的 Encoder 還原並加強 Side)
+
+### Sprint 8: Oscillators & Modulation (訊號產生與調變)
+*重點：自己產生聲音，或是用產生的聲音去控制別人 (LFO)。*
+071. Phase Accumulator (一直累加的 Phasor)
+072. Naive Sine Oscillator (用 `std::sin`)
+073. Wavetable Oscillator (查表法震盪器)
+074. LFO - Triangle & Square (非正弦波)
+075. Tremolo (用 LFO 控制 Volume)
+076. Vibrato (用 LFO 控制 Fractional Delay 時間的 Pitch shift)
+077. Chorus (多個小延遲 + 不同 LFO)
+078. Flanger (極短延遲 + LFO + Feedback)
+079. Phaser (All-pass filter chains + LFO 控制頻率)
+080. Ring Modulator (兩個訊號相乘)
+
+### Sprint 9: Advanced Math, Performance & AI (效能與前沿技術)
+*重點：效能壓榨，與你最有優勢的 AI 連結點。*
+081. Lock-free Circular Buffer (概念：Single Producer Single Consumer)
+082. SIMD concept: Processing 4 samples at once (用簡單的 `for` 模擬 Vectorization 概念)
+083. Branchless Math (消除迴圈內的 `if` 提升 CPU 效能)
+084. FFT Windowing function (Hann / Hamming)
+085. Real-time Power Spectrum average (給 UI 畫頻譜用)
+086. AI Inference: Dot Product / Matrix-Vector multiply (NN 基礎)
+087. AI Inference: ReLU Layer
+088. AI Inference: Single Layer Perceptron processing audio
+089. State-Space Equation step calculation (更進階的 Filter 表示法)
+090. Zero-Delay Feedback (ZDF) Filter (一階，解決傳統濾波器延遲問題)
+
+### Sprint 10: Integration & "The Process Block" (系統整合)
+*重點：面試終極考驗 - 你能不能把這些碎片拼成一個完整的產品？這階段要學會封裝。*
+091. Class Structure: The `Processor` base class (準備 `prepareToPlay` 和 `processBlock`)
+092. Polyphonic Voice Manager (如何管理多個正在發聲的物體)
+093. Parameter Manager Mapping (將 0-1 的 UI knob 對應到實際濾波頻率、Gain)
+094. Effect Chain: Series processing (串聯多個效果器)
+095. Effect Chain: Wet/Dry Mix implementation
+096. A/B Testing Switch logic (無縫切換兩種設定確保不爆音)
+097. CPU Usage Counter implementation (計算 process 耗時)
+098. Audio File Reader simulation (模擬吐出 wav 數據)
+099. End-to-end Test: Simple Distortion Pedal (Gain -> Clip -> Tone -> Out)
+100. End-to-end Test: Simple Delay Pedal (In -> Filter -> Delay -> Mix -> Out)
+
+---
+
+## 🏃 執行指南 與 KATA 學習法
+
+### 1. 怎麼用這份清單？
+這份清單是你的「刻意練習」課表。請**嚴格按照順序**（Sprint 1 -> 10）。
+前面的函數會變成後面 Class 的零件。比如 Sprint 6 的 Compressor 就需要 Sprint 3 的 Smoother 和 Sprint 1 的 Decibel Conversion。
+
+### 2. "三步盲寫法" (The Kata Workflow)
+這不是用來看的，是要用手敲的。
+
+**Step A: 拆解與理解 (Analyze)**
+- 選一題，在對應資料夾建立 `.h` / `.cpp`。
+- 由「Antigravity (AI)」提供**工業級標準代碼**跟**原理講解**。
+- 仔細看懂：指標怎麼跑？`for` 迴圈範圍在哪？為什麼要防除以零？
+
+**Step B: 臨摹 (Copying / Shadowing)**
+- 關掉 AI 的代碼。
+- 試著只憑記憶重新默寫一次（這時候一定會卡住、出錯）。
+- 兩邊對照，找出你哪裡「想得不對」（通常是指標越界，或是狀態沒有保存更新）。
+
+**Step C: 肌肉記憶 (Flashcard / Muscle Memory)**
+- 隔天或幾個小時後，對著只有注釋或空空如也的檔案，要求自己 **「只靠直覺，在 3 分鐘內把這個演算法敲出來並可以 Compile」**。
+- 如果你能不假思索地寫出 `for (int i=0; i<numSamples; ++i) { output[i] = input[i] * gain; }`，你就不會覺得 C++ "卡卡的" 了。
+
+### 3. 如何驗證對錯？ (免 JUCE 測試法)
+- 在 Antigravity 環境中，我們可以寫一個極簡的 `main.cpp`。
+- 輸入固定的數組 (例如 `[1.0, 0.5, 0.0, -0.5, -1.0]`)，讓你的演算法跑過去，把輸出的數值 `std::cout` 印出來看。
+- 只要數值變化跟公式吻合，你的模組就正確！不需要開笨重的 DAW 或弄 UI。
+
+> **準備好了嗎？我們從 `01_Basic_Math_and_Interpolation` 的 001 題開始衝刺吧！**
