@@ -32,10 +32,10 @@
 
 class OnePoleSmoother
 {
-  private:
+private:
     float z1 = 0.0f; // 記憶上一個輸出的狀態 (Delay 1 sample)
 
-  public:
+public:
     float coeff = 0.1f; // 平滑係數 (接近 0 表示動作很慢，接近 1 表示瞬間到達)
 
     void reset()

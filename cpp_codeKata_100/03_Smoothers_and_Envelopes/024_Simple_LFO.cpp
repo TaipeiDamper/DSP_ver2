@@ -28,8 +28,8 @@
 class SimpleLFO
 {
     // 請拔除輔助輪，自由發揮！
-  private:
-  public:
+private:
+public:
     SimpleLFO() {};
     void setFrequency(float freq_)
     {
@@ -47,7 +47,7 @@ class SimpleLFO
         return output;
     };
 
-  protected:
+protected:
     float phase = 0.0f;
     float frequency = 0.0f;
     float sampleRate = 0.0f;

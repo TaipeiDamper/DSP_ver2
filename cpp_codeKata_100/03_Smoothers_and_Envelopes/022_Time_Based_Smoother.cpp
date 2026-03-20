@@ -27,11 +27,11 @@
 
 class TimeBasedSmoother
 {
-  private:
+private:
     float z1 = 0.0f;
     float coeff = 1.0f; // 預設 1.0 代表不平滑，瞬間到達
 
-  public:
+public:
     void reset()
     {
         z1 = 0.0f;

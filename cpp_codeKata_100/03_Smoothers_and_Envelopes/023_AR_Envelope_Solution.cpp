@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 /*
  * ==============================================================================
@@ -39,7 +39,7 @@ public:
 
         // 3. 套用記憶心法公式：舊的比例留下，新的比例進來
         float output = (z1 * memory) + (input * (1.0f - memory));
-        
+
         // 4. 更新歷史並回傳
         z1 = output;
         return output;

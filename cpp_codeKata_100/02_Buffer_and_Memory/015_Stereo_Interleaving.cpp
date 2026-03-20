@@ -29,11 +29,11 @@ void interleave(const std::vector<float> &leftBuffer, const std::vector<float> &
     // 你的程式碼寫在這裡：
     // 提示：利用 out[i * 2] 和 out[i * 2 + 1] 來儲存資料。
 
-        for (int i = 0; i < leftBuffer.size(); i++)
-        {
-            interleavedOut[i * 2] = leftBuffer[i];
-            interleavedOut[i * 2 + 1] = rightBuffer[i];
-        }
+    for (int i = 0; i < leftBuffer.size(); i++)
+    {
+        interleavedOut[i * 2] = leftBuffer[i];
+        interleavedOut[i * 2 + 1] = rightBuffer[i];
+    }
 
     // ------------------------------------------------------------------
 }

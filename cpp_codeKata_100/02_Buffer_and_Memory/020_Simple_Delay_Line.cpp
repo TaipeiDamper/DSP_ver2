@@ -24,12 +24,12 @@
 
 class SimpleDelay
 {
-  private:
+private:
     std::vector<float> buffer;
     int writeIndex;
     int bufferSize;
 
-  public:
+public:
     // 效果器參數
     float delaySamples = 0.0f;
     float feedback = 0.0f;

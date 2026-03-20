@@ -7,21 +7,24 @@
  * ==============================================================================
  */
 
-struct CircularBuffer {
+struct CircularBuffer
+{
     std::vector<float> buffer;
     int writeIndex;
 
-    CircularBuffer(int size) {
+    CircularBuffer(int size)
+    {
         buffer.resize(size, 0.0f);
         writeIndex = 0;
     }
 
-    void pushSample(float input) {
+    void pushSample(float input)
+    {
         // ------------------------------------------------------------------
         // 解答：
         // 1. 寫入數值
         buffer[writeIndex] = input;
-        
+
         // 2. 推進指標並繞回
         // 寫法 A: 利用 modulo (%) 運算子，寫起來最優雅
         writeIndex = (writeIndex + 1) % buffer.size();
@@ -37,7 +40,8 @@ struct CircularBuffer {
     }
 };
 
-int main() {
+int main()
+{
     std::cout << "這是解答檔，請自行對照！\n";
     return 0;
 }

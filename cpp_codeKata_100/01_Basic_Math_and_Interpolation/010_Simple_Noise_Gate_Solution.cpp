@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 /*
  * ==============================================================================
@@ -7,17 +7,20 @@
  * ==============================================================================
  */
 
-float simpleGate(float input, float threshold) {
+float simpleGate(float input, float threshold)
+{
     // ------------------------------------------------------------------
     // 解答：
-    if (std::abs(input) > threshold) {
+    if (std::abs(input) > threshold)
+    {
         return input;
     }
     return 0.0f;
     // ------------------------------------------------------------------
 }
 
-int main() {
+int main()
+{
     std::cout << "這是解答檔，請自行對照！\n";
     return 0;
 }

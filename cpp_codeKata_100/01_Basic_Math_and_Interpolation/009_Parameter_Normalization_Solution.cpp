@@ -1,6 +1,6 @@
-#include <iostream>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
 
 /*
  * ==============================================================================
@@ -8,7 +8,8 @@
  * ==============================================================================
  */
 
-float mapLinear(float normalizedValue, float min, float max) {
+float mapLinear(float normalizedValue, float min, float max)
+{
     // ------------------------------------------------------------------
     // 解答：
     float v = std::clamp(normalizedValue, 0.0f, 1.0f);
@@ -16,7 +17,8 @@ float mapLinear(float normalizedValue, float min, float max) {
     // ------------------------------------------------------------------
 }
 
-int main() {
+int main()
+{
     std::cout << "這是解答檔，請自行對照！\n";
     return 0;
 }

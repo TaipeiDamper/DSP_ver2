@@ -7,22 +7,25 @@
  * ==============================================================================
  */
 
-void mixBuffers(const std::vector<float>& inA, const std::vector<float>& inB, std::vector<float>& out) {
+void mixBuffers(const std::vector<float> &inA, const std::vector<float> &inB, std::vector<float> &out)
+{
     // ------------------------------------------------------------------
     // 解答：
-    for (size_t i = 0; i < inA.size(); ++i) {
+    for (size_t i = 0; i < inA.size(); ++i)
+    {
         out[i] = inA[i] + inB[i];
     }
-    
-    /* 
-    補充：這雖然是基礎寫法，但在面試時，如果你提過 C++ 有一些函式庫 
+
+    /*
+    補充：這雖然是基礎寫法，但在面試時，如果你提過 C++ 有一些函式庫
     (如 Intel IPP 或使用 SIMD) 可以一次處理 4 個或 8 個加法，面試官會對你刮目相看。
     但在 Kata 中，我們先把正確的邏輯敲進肌肉裡。
     */
     // ------------------------------------------------------------------
 }
 
-int main() {
+int main()
+{
     std::cout << "這是解答檔，請自行對照！\n";
     return 0;
 }

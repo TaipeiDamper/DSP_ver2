@@ -1,6 +1,6 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 /*
  * ==============================================================================
@@ -8,20 +8,22 @@
  * ==============================================================================
  */
 
-void clearBuffer(std::vector<float>& buffer) {
+void clearBuffer(std::vector<float> &buffer)
+{
     // ------------------------------------------------------------------
     // 解答：
     // std::fill 是最標準且具備編譯器優化的方式
     std::fill(buffer.begin(), buffer.end(), 0.0f);
-    
-    /* 
+
+    /*
     補充：在底層效能考量下，有些人會用 memset，但 std::fill 在處理 float 陣列時
     通常會被編譯器優化成同樣快的指令，且更安全。
     */
     // ------------------------------------------------------------------
 }
 
-int main() {
+int main()
+{
     std::cout << "這是解答檔，請自行對照！\n";
     return 0;
 }

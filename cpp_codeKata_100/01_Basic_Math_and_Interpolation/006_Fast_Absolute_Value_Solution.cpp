@@ -1,7 +1,7 @@
-#include <iostream>
 #include <cmath>
 #include <cstdint>
 #include <cstring>
+#include <iostream>
 
 /*
  * ==============================================================================
@@ -9,7 +9,8 @@
  * ==============================================================================
  */
 
-float fastAbs(float n) {
+float fastAbs(float n)
+{
     // 做法 1：使用 std::memcpy (C++20 以前最安全、不違反 Strict Aliasing Rule 的做法)
     uint32_t i;
     std::memcpy(&i, &n, 4);
@@ -18,7 +19,7 @@ float fastAbs(float n) {
     std::memcpy(&result, &i, 4);
     return result;
 
-    /* 
+    /*
     做法 2 (現代 C++20)：
     return std::bit_cast<float>(std::bit_cast<uint32_t>(n) & 0x7FFFFFFF);
     */
@@ -31,7 +32,8 @@ float fastAbs(float n) {
     */
 }
 
-int main() {
+int main()
+{
     std::cout << "這是解答檔，請自行對照！\n";
     return 0;
 }
