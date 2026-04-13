@@ -145,3 +145,13 @@ C++（現代 C++，偏重 audio real-time 設計） - JUCE framework - DSP
 -   **AI 協作**：重新整編 `AI_manage_area` 並建立 `dsp_learning_strategist` Skill，統一了協作規範。
 -   **狀態**：V1 邏輯已完成。下次將挑戰手寫 V1.1 (複習) 或進階到 V2 (dB Domain)。
 
+### 2026-03-26 進度更新
+
+-   **實作成果**：`modules/outerPractices/rebuildDelay.cpp` (Delay Line 實作)
+-   **核心練習**：
+    -   **Top-Down 結構**：先以註解規劃功能區塊，再拆解為子函式。
+    -   **可讀性優化**：函式保持短小、目的單一。
+-   **技術要點**：
+    -   `processSample` 的主流程拆解為：讀取(插值) -> 寫入(回饋) -> 指標遞進。
+    -   落實「先寫註解決定區塊，再補足實作」的工作流。
+
